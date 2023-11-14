@@ -5,6 +5,9 @@
 package labs.pm.app.data;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.Objects;
+
 import static java.math.RoundingMode.HALF_UP;
 /**
  * {@code Product} class represent properties and behaviours of
@@ -16,7 +19,7 @@ import static java.math.RoundingMode.HALF_UP;
  * @author lorenzo.grandi
 
  **/
-public class Product {
+public sealed class Product permits Food,Drink{
 
     private final int id;
     private final String name;
@@ -60,22 +63,51 @@ public class Product {
     }
 
     public Product applyRating(Rating r){
-        return new Product(id,name,price,r);
+        return new Product(getId(),getName(),getPrice(),r);
     }
-    public Product(int id, String name, BigDecimal price, Rating rating) {
+    Product(int id, String name, BigDecimal price, Rating rating) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.rating = rating;
     }
 
-    public Product(int id, String name, BigDecimal price) {
-        //reuse of the existing constructor
-       this(id,name,price,Rating.NOT_RATED);
+//    public Product(int id, String name, BigDecimal price) {
+//        //reuse of the existing constructor
+//       this(id,name,price,Rating.NOT_RATED);
+//    }
+//
+//    public Product(){
+//       this(0,"no name",BigDecimal.ZERO);
+//    }
+
+    public LocalDate getBestBefore() {
+        return LocalDate.now();
     }
 
-    public Product(){
-        this(0,"no name",BigDecimal.ZERO);
+    @Override
+    public String  toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", rating=" + rating.getStars() +
+                '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+        if(o instanceof Product product) {
+//            Product product = (Product) o;
+            return id == product.id && Objects.equals(name, product.name);
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }
