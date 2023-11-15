@@ -19,7 +19,7 @@ import static java.math.RoundingMode.HALF_UP;
  * @author lorenzo.grandi
 
  **/
-public sealed class Product permits Food,Drink{
+public sealed class Product implements Rateable<Product> permits Food,Drink{
 
     private final int id;
     private final String name;
