@@ -101,7 +101,7 @@ public sealed class Product implements Rateable<Product> permits Food,Drink{
 //        if (o == null || getClass() != o.getClass()) return false;
         if(o instanceof Product product) {
 //            Product product = (Product) o;
-            return id == product.id && Objects.equals(name, product.name);
+            return id == product.id ;
         }
         return false;
     }
@@ -110,4 +110,6 @@ public sealed class Product implements Rateable<Product> permits Food,Drink{
     public int hashCode() {
         return Objects.hash(id);
     }
+
+
 }

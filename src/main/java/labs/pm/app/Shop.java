@@ -10,12 +10,34 @@ import java.util.Locale;
 public class Shop {
     public static void main(String[] args) {
 
-        ProductManager pm = new ProductManager();
+        ProductManager pm = new ProductManager("en-GB");
         Product p1 = pm.createProduct(101, "Tea", BigDecimal.valueOf(1.99), Rating.FOUR_STAR);
         Product p2 = pm.createProduct(102, "TeaCup", BigDecimal.valueOf(3.99), Rating.FOUR_STAR);
         Product p4 = p2.applyRating(Rating.TWO_STAR);
         pm.reviewProduct(p2,Rating.FIVE_STAR,"TOP");
-        pm.printProductReport();
+        pm.printProductReport(p1);
+        p1=pm.reviewProduct(101,Rating.FIVE_STAR,"Top");
+        p1=pm.reviewProduct(p1,Rating.FOUR_STAR,"Nice");
+        p1=pm.reviewProduct(p1,Rating.TWO_STAR,"Meh");
+        p1=pm.reviewProduct(101,Rating.FIVE_STAR,"Top");
+        p1=pm.reviewProduct(p1,Rating.ONE_STAR,"Bad");
+        p1=pm.reviewProduct(p1,Rating.FIVE_STAR,"Top");
+        pm.printProductReport(p1);
+        pm.findProduct(101);
+        pm.changeLocale("it-IT");
+        pm.printProductReport(p1);
+
+
+
+
+
+
+
+
+
+
+
+        /*
         Product p3 = pm.createProduct(103,"Cake",BigDecimal.valueOf(3.99),Rating.FIVE_STAR, LocalDate.now().plusDays(2));
 
         Product p6 = pm.createProduct(104, "Chocolate", BigDecimal.valueOf(3.99), Rating.FIVE_STAR);
@@ -32,6 +54,8 @@ public class Shop {
         System.out.println(p4);
         System.out.println(p6.equals(p7));
         System.out.println(p8);
+*/
+
+        }
 
     }
-}

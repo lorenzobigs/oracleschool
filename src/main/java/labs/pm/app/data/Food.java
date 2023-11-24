@@ -12,6 +12,11 @@ import java.time.LocalDate;
 public final class Food extends Product{
 
     private LocalDate bestBefore;
+    private String quality;
+
+    public void setQuality(String quality) {
+        this.quality = quality;
+    }
 
     public LocalDate getBestBefore() {
         return bestBefore;
